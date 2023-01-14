@@ -84,7 +84,7 @@ class SignalFilter:
 		#print trans_real[frec]
 		#print frec
 		min = (frec - band / 2) if (frec > band / 2) else 0
-		filter_array = append(zeros(min), ones(band))
+		filter_array = append(zeros(int(min)), ones(band))
 		filter_array = append(filter_array, zeros(len(trans_real) - len(filter_array)))
 		filtered_array = multiply(trans, filter_array)
 		plotter.saveplot("filtered_trans",abs(filtered_array))
@@ -239,7 +239,7 @@ class Codes:
 			self.dic[entry["code"]] = entry["char"]
 	
 	def tochar(self, code):
-		if self.dic.has_key(code):
+		if code in self.dic:
 			return self.dic[code]
 		return "?"
 
@@ -258,7 +258,7 @@ class StringTranslator:
 		return text
 
 if len(sys.argv) < 2:
-	print "Usage: " + sys.argv[0] + " soundfile.wav [--report[=pdf|=png]]"
+	print("Usage: " + sys.argv[0] + " soundfile.wav [--report[=pdf|=png]]")
 	sys.exit(1)
 
 plotter = DummyPlotter()
@@ -285,22 +285,7 @@ code_string = pul_translator.tostring(pulses)
 str_translator = StringTranslator()
 s = str_translator.totext(code_string)
 
-print code_string
-print s
+print(code_string)
+print(s)
 
 #####
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
